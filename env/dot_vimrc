@@ -1,6 +1,6 @@
 "Enable pathogen to manage the 'runtimepath'
 execute pathogen#infect() 
-
+filetype plugin on
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => VIM user interface
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -111,3 +111,5 @@ endfunction
 " => Command mappings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 cmap w!! w !sudo tee > /dev/null %
+let mapleader = ","
+let g:mapleader = ","
