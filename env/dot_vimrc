@@ -106,3 +106,8 @@ function! HasPaste()
     en
     return ''
 endfunction
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Command mappings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+cmap w!! w !sudo tee > /dev/null %
