@@ -4,6 +4,9 @@ filetype plugin on
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => VIM user interface
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Call the function whenever opening a .cpp file
+autocmd FileType cpp call SetCPPOptions()
+
 " Ignore case when searching
 set ignorecase
 
@@ -113,3 +116,18 @@ endfunction
 cmap w!! w !sudo tee > /dev/null %
 let mapleader = ","
 let g:mapleader = ","
+
+"Ctrl-j/k deletes blank line below/above, and Alt-j/k inserts blank line below/above
+nnoremap <silent><C-j> m`:silent +g/\m^\s*$/d<CR>``:noh<CR>
+nnoremap <silent><C-k> m`:silent -g/\m^\s*$/d<CR>``:noh<CR>
+nnoremap <silent><leader>j :set paste<CR>m`o<Esc>``:set nopaste<CR>
+nnoremap <silent><leader>k :set paste<CR>m`O<Esc>``:set nopaste<CR>
+
+nmap <F8> :TagbarToggle<CR>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Helper Functions
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! SetCPPOptions()
+    :call tagbar#autoopen(0)
+endfunction
