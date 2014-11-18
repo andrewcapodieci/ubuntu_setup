@@ -8,6 +8,7 @@ source ~/.screenrc
 screen -t dev 0
 split
 resize 40
+clear
 focus down 
 #screen -t test 1 autotest -f
 #split -v
