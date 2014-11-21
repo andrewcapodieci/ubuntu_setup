@@ -6,7 +6,7 @@ for file in $( ls $HOME/ubuntu_setup/env/dot_* ); do
         read -p "File already exists. Overwrite file [Y/n]?:" -n 1 -r
         echo
         if [[ $REPLY =~ ^[Yy]$ ]]; then
-            ln -s -f $file filename 
+            ln -s -f $file $filename 
             echo "Overwrote existing softlink for $filename"
         fi 
     else

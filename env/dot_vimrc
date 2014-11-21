@@ -6,7 +6,7 @@ filetype plugin on
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Call the function whenever opening a .cpp file
 autocmd FileType cpp call SetCPPOptions()
-
+autocmd VimEnter * NERDTree
 " Ignore case when searching
 set ignorecase
 
@@ -74,7 +74,7 @@ set tw=500
 
 set ai "Auto indent
 set si "Smart indent
-set wrap "Wraip lines
+set nowrap "Wrap lines
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Moving around, tabs, windows and buffers
