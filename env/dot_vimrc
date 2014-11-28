@@ -6,7 +6,7 @@ filetype plugin on
 " => Autocmd's
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Call the function whenever opening a .cpp file
-autocmd FileType cpp call SetCPPOptions()
+autocmd FileType cpp tpp call SetCPPOptions()
 autocmd VimEnter * NERDTree
 autocmd VimEnter * wincmd p
 autocmd WinEnter * call NERDTreeQuit()

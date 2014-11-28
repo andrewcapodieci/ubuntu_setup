@@ -1,1 +1,1 @@
-sudo apt-get install vim screen git gitk indicator-multiload indicator-cpufreq exuberant-ctags
+sudo apt-get install -y vim screen git gitk indicator-multiload indicator-cpufreq exuberant-ctags yakuake
