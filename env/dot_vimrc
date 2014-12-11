@@ -6,7 +6,8 @@ filetype plugin on
 " => Autocmd's
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Call the function whenever opening a .cpp file
-autocmd FileType cpp tpp call SetCPPOptions()
+autocmd FileType cpp call SetCPPOptions()
+autocmd FileType tpp call SetTPPOptions()
 autocmd VimEnter * NERDTree
 autocmd VimEnter * wincmd p
 autocmd WinEnter * call NERDTreeQuit()
@@ -83,6 +84,15 @@ set ai "Auto indent
 set si "Smart indent
 set nowrap "Wrap lines
 
+map <C-F12> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
+set tags+=./tags
+set tags+=tags
+set tags+=$HOME/.vim/tags/c++_tags
+set tags+=$HOME/.vim/tags/usr_include_tags
+set tags+=$HOME/.vim/tags/usr_local_include_tags
+set tags+=$HOME/.vim/tags/opencv_tags
+set tags+=$HOME
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Moving around, tabs, windows and buffers
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -97,6 +107,8 @@ nnoremap k gk
 " toggle gundo
 nnoremap <leader>u :GundoToggle<CR>
 
+" If a window already contains the file, switch to that window
+set switchbuf=useopen
 """"""""""""""""""""""""""""""
 " => Status line
 """"""""""""""""""""""""""""""
@@ -139,6 +151,10 @@ function! SetCPPOptions()
     :call tagbar#autoopen(0)
 endfunction
 
+function! SetTPPOptions()
+    :set syntax=cpp
+    :call tagbar#autoopen(0)
+endfunction
 
 function! NERDTreeQuit()
   redir => buffersoutput
