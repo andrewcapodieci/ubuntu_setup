@@ -16,3 +16,6 @@ CHECK_DIR_AND_CLONE nerdtree https://github.com/scrooloose/nerdtree
 
 #NERDCommenter
 CHECK_DIR_AND_CLONE nerdcommenter https://github.com/scrooloose/nerdcommenter
+
+#Tagbar
+CHECK_DIR_AND_CLONE tagbar git clone git://github.com/majutsushi/tagbar
