@@ -8,7 +8,8 @@ function CHECK_DIR_AND_CLONE {
     fi
 }
 
-mkdir -p ~/.vim/bundle
+mkdir -p ~/.vim/autoload ~/.vim/bundle && \
+curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
 cd ~/.vim/bundle
 
 #NERDTree
@@ -18,4 +19,4 @@ CHECK_DIR_AND_CLONE nerdtree https://github.com/scrooloose/nerdtree
 CHECK_DIR_AND_CLONE nerdcommenter https://github.com/scrooloose/nerdcommenter
 
 #Tagbar
-CHECK_DIR_AND_CLONE tagbar git clone git://github.com/majutsushi/tagbar
+CHECK_DIR_AND_CLONE tagbar https://github.com/majutsushi/tagbar
