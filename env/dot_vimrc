@@ -85,13 +85,7 @@ set si "Smart indent
 set nowrap "Wrap lines
 
 map <C-F12> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
-set tags+=./tags
-set tags+=tags
-set tags+=$HOME/.vim/tags/c++_tags
-set tags+=$HOME/.vim/tags/usr_include_tags
-set tags+=$HOME/.vim/tags/usr_local_include_tags
-set tags+=$HOME/.vim/tags/opencv_tags
-set tags+=$HOME
+set tags=./tags;~/
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Moving around, tabs, windows and buffers
