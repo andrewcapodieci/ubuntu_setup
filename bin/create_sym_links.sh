@@ -1,3 +1,4 @@
+#!/bin/bash
 for file in $( ls $HOME/ubuntu_setup/env/dot_* ); do
     filename=${file/ubuntu_setup\/env\/dot_/.}
     create_file=false

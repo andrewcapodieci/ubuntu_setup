@@ -16,3 +16,4 @@ After running the script, you still need to do the following:
   6. Change mergetool to meld
   7. Install adblocker
   8. Add CMakeLists.txt and other non .cpp / .h files to vim CPP setup function
+  9. Disable sticky edges in display settings

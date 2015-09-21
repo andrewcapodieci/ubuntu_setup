@@ -1,3 +1,4 @@
+#!/bin/bash
 if [[ $(tail -1 $HOME/.bashrc) == "source $HOME/ubuntu_setup/env/bash.local" ]];
 then
   echo "Already sourcing env/bash.local in $HOME/.bashrc"
