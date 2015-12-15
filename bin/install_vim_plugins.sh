@@ -20,3 +20,6 @@ CHECK_DIR_AND_CLONE nerdcommenter https://github.com/scrooloose/nerdcommenter
 
 #Tagbar
 CHECK_DIR_AND_CLONE tagbar https://github.com/majutsushi/tagbar
+
+#Gundo
+CHECK_DIR_AND_CLONE gundo https://github.com/sjl/gundo.vim
