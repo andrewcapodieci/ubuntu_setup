@@ -1,0 +1,27 @@
+#!/bin/sh
+
+#SCRIPT_DIR=${DEV_DIR}/scripts
+CURR_DIR=`pwd`
+#mkdir -p ${SCRIPT_DIR}
+
+#echo "Building astyle..."
+#install and build astyle
+#cp -R astyle ${EXT_DIR}
+#cd ${EXT_DIR}/astyle/build/gcc && make -j 8
+#echo "done."
+#echo
+
+if ! [ -e /usr/bin/astyle ] ; then
+  echo "Creating symbolic link to astyle executable."
+  sudo ln -s ${DEV_DIR}/scripts/autocodeformatter/astyle /usr/bin/astyle
+fi
+
+#echo "Installing scripts directory in ${DEV_DIR}/"
+cd $CURR_DIR
+#install formatting scripts
+#cp format ${SCRIPT_DIR}
+#cp formatFile ${SCRIPT_DIR}
+#cp checkCodeFormat ${SCRIPT_DIR}
+echo "Installing pre-commit hook"
+cp ${DEV_DIR}/scripts/pre-commit ${DEV_DIR}/.git/hooks/
+#cp .astyle ${SCRIPT_DIR}

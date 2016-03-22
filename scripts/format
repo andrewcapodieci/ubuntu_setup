@@ -1,0 +1,31 @@
+#!/bin/sh
+
+# Change () to ( )
+find ${DEV_DIR} -type d \( -path ./include -o -path ./build \) -prune -o -name "*.cpp" -exec sed -i 's/()/( )/g' {} \;
+find ${DEV_DIR} -type d \( -path ./include -o -path ./build \) -prune -o -name "*.h" -exec sed -i 's/()/( )/g' {} \;
+find ${DEV_DIR} -type d \( -path ./include -o -path ./build \) -prune -o -name "*.hpp" -exec sed -i 's/()/( )/g' {} \;
+
+#Run astyle
+astyle --options=${DEV_DIR}/scripts/.astyle --recursive -n ${DEV_DIR}/*.cpp ${DEV_DIR}/*.h ${DEV_DIR}/*.hpp
+
+# Change >>>> to > > > >
+find ${DEV_DIR} -type d \( -path ./include -o -path ./build \) -prune -o -name "*.cpp" -exec sed -i 's/\([^ ]\)>>>>/\1> > > >/g' {} \;
+find ${DEV_DIR} -type d \( -path ./include -o -path ./build \) -prune -o -name "*.h" -exec sed -i 's/\([^ ]\)>>>>/\1> > > >/g' {} \;
+find ${DEV_DIR} -type d \( -path ./include -o -path ./build \) -prune -o -name "*.hpp" -exec sed -i 's/\([^ ]\)>>>>/\1> > > >/g' {} \;
+
+# Change >>> to > > >
+find ${DEV_DIR} -type d \( -path ./include -o -path ./build \) -prune -o -name "*.cpp" -exec sed -i 's/\([^ ]\)>>>/\1> > >/g' {} \;
+find ${DEV_DIR} -type d \( -path ./include -o -path ./build \) -prune -o -name "*.h" -exec sed -i 's/\([^ ]\)>>>/\1> > >/g' {} \;
+find ${DEV_DIR} -type d \( -path ./include -o -path ./build \) -prune -o -name "*.hpp" -exec sed -i 's/\([^ ]\)>>>/\1> > >/g' {} \;
+
+# Change >> to > >
+find ${DEV_DIR} -type d \( -path ./include -o -path ./build \) -prune -o -name "*.cpp" -exec sed -i 's/\([^ ]\)>>/\1> >/g' {} \;
+find ${DEV_DIR} -type d \( -path ./include -o -path ./build \) -prune -o -name "*.h" -exec sed -i 's/\([^ ]\)>>/\1> >/g' {} \;
+find ${DEV_DIR} -type d \( -path ./include -o -path ./build \) -prune -o -name "*.hpp" -exec sed -i 's/\([^ ]\)>>/\1> >/g' {} \;
+
+# Change //! to ///
+find ${DEV_DIR} -type d \( -path ./include -o -path ./build \) -prune -o -name "*.cpp" -exec sed -i 's/\/\/\!/\/\/\//g' {} \;
+find ${DEV_DIR} -type d \( -path ./include -o -path ./build \) -prune -o -name "*.h" -exec sed -i 's/\/\/\!/\/\/\//g' {} \;
+find ${DEV_DIR} -type d \( -path ./include -o -path ./build \) -prune -o -name "*.hpp" -exec sed -i 's/\/\/\!/\/\/\//g' {} \;
+
+git status

@@ -1,0 +1,41 @@
+#!/bin/bash
+allFiles=`git diff --cached --name-only --diff-filter=AMCRT`
+
+unform=""
+
+for file in $allFiles; do
+  if [[ $file == *.cpp || $file == *.h || $file == *.h_inl || $file == *.hpp ]] ; then
+    cp ${DEV_DIR}/$file ${DEV_DIR}/$file.tmp
+    ${DEV_DIR}/scripts/formatFile ${DEV_DIR}/$file.tmp
+
+    diff ${DEV_DIR}/$file ${DEV_DIR}/$file.tmp > /dev/null
+    if [[ $? -ne 0 ]] ; then
+      if [[ "$unform" == "" ]] ; then
+        unform=$file
+      else
+        unform="$unform, $file"
+      fi
+    fi
+    rm ${DEV_DIR}/$file.tmp
+  fi
+done
+
+git status &> /dev/null
+
+if [ "$unform" != "" ] ; then 
+  echo "Commit did not match proper formatting for the following files:"
+  echo "$unform"
+
+  read -p "Would you like to run the autoformatter on these files now [y/N]?:" -n 1 -r
+  echo
+  if [[ $REPLY =~ ^[Yy]$ ]]; then
+      arr=$(echo $unform | tr ", " "\n" )
+      for fileToFormat in $arr
+      do
+        ${DEV_DIR}/scripts/formatFile ${DEV_DIR}/$fileToFormat
+        git add ${DEV_DIR}/$fileToFormat
+      done
+  fi
+
+  exit 1;
+fi

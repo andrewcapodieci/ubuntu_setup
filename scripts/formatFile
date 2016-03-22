@@ -1,0 +1,20 @@
+#!/bin/sh
+
+file=$1
+
+# Change () to ( )
+sed -i 's/()/( )/g' $file
+
+#Run astyle
+astyle --options=${DEV_DIR}/scripts/.astyle -q -n $file
+
+# Change >>>> to > > > >
+sed -i 's/\([^ ]\)>>>>/\1> > > >/g' $file
+# Change >>> to > > >
+sed -i 's/\([^ ]\)>>>/\1> > >/g' $file
+# Change >> to > >
+sed -i 's/\([^ ]\)>>/\1> >/g' $file
+
+# Change //! to ///
+sed -i 's/\/\/\!/\/\/\//g' $file
+
