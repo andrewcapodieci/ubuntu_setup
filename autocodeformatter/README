@@ -1,0 +1,14 @@
+# install_format_scripts will install the auto formatting
+# tool AStyle and a git pre-commit hook to validate changes 
+# checked into the index are properly formatted before 
+# allowing you to commit. To aid this process, the following 
+# scripts are installed in ${DEV_DIR}/scripts:
+
+# 1) checkCodeFormat -- grabs all files with changes in the
+#    index and validates they are of the proper format by
+#    calling formatFile.
+# 2) formatFile -- Runs auto formatters on the file using the 
+#    .astyle config file that was also installed
+#    in the scripts dir.
+# 3) format -- Runs auto formatters recursively on every 
+#    *.cpp, *.h and *.hpp file in ${DEV_DIR}

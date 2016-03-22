@@ -1,0 +1,120 @@
+#!/bin/bash
+display_usage() 
+{
+  echo -e "makeDir creates a new directory by leveraging filetemplates to promote code standard compliance."
+  echo -e "The directory will be prefixed by the DEV_DIR environment variable."
+  echo -e "\t-d|--directory\t\tREQUIRED: indicates the next argument will be the name of the directory to create"
+  echo -e "\t-s|--source\t\tOPTIONAL: copy FileTemplate.cpp to DIRNAME/src"
+  echo -e "\t-h|--header\t\tOPTIONAL: copy FileTemplate.h to DIRNAME/include/DIRNAME"
+  echo -e "\t-t|--template\t\tOPTIONAL: copy FileTemplate.hpp to DIRNAME/include/DIRNAME"
+  echo -e "\t-u|--unittest\t\tOPTIONAL: copy the unittest directory to DIRNAME/"
+  echo -e "\t-c|--cmake\t\tOPTIONAL: copy the CMakeLists.txt example from filetemplates to DIRNAME"
+  echo -e "\t-f|--filename\t\tOPTIONAL: specify a filename instead of using FileTemplate.xxx"
+  exit 0
+}
+
+HELP=0
+
+SOURCE=0
+TEMPLATE=0
+HEADER=0
+UNITTEST=0
+CMAKE=0
+FILENAME=""
+
+DIR=""
+
+while [[ $# > 0 ]]
+do
+  key="$1"
+
+  case $key in
+    --help)
+    HELP=1
+    ;;
+    -d|--directory)
+    shift
+    DIR="$1"
+    ;;
+    -s|--source)
+    SOURCE=1
+    ;;
+    -t|--template)
+    TEMPLATE=1
+    ;;
+    -h|--header)
+    HEADER=1
+    ;;
+    -u|--unittest)
+    UNITTEST=1
+    ;;
+    -c|--cmake)
+    CMAKE=1
+    ;;
+    -f|--filename)
+    shift
+    FILENAME="$1"
+    ;;
+    -a|--all)
+    SOURCE=1
+    TEMPLATE=1
+    HEADER=1
+    UNITTEST=1
+    CMAKE=1
+    ;;
+    *)
+    ;;
+  esac
+  shift
+done
+
+if [[ HELP -eq 1 ]] ; then
+  display_usage
+fi
+
+if [[ "$DIR" == "" ]] ; then
+  display_usage
+fi
+
+mkdir -p ${DEV_DIR}/$DIR
+echo "Made DIRectory ${DEV_DIR}/$DIR"
+
+if [[ CMAKE -eq 1 ]] ; then
+  cp -i ${DEV_DIR}/filetemplates/CMakeLists.txt ${DEV_DIR}/$DIR/
+  echo "Made cmake file."
+fi
+
+if [[ SOURCE -eq 1 ]] ; then
+  mkdir -p ${DEV_DIR}/$DIR/src &&
+    cp -i ${DEV_DIR}/filetemplates/FileTemplate.cpp ${DEV_DIR}/$DIR/src/
+  if [[ "$FILENAME" != "" ]] ; then
+    mv -i ${DEV_DIR}/$DIR/src/FileTemplate.cpp ${DEV_DIR}/$DIR/src/$FILENAME.cpp
+    sed -i "s/FileTemplate/${FILENAME}/g" ${DEV_DIR}/$DIR/src/$FILENAME.cpp
+  fi
+  echo "Made source file."
+fi
+
+if [[ HEADER -eq 1 ]] ; then
+  mkdir -p ${DEV_DIR}/$DIR/include/$DIR &&
+    cp -i ${DEV_DIR}/filetemplates/FileTemplate.h ${DEV_DIR}/$DIR/include/$DIR/
+  if [[ "$FILENAME" != "" ]] ; then
+    mv -i ${DEV_DIR}/$DIR/include/$DIR/FileTemplate.h ${DEV_DIR}/$DIR/include/$DIR/$FILENAME.h
+    sed -i "s/FileTemplate/$FILENAME/g" ${DEV_DIR}/$DIR/include/$DIR/$FILENAME.h
+  fi
+  echo "Made header file."
+fi
+
+if [[ TEMPLATE -eq 1 ]] ; then
+  mkdir -p ${DEV_DIR}/$DIR/include/$DIR &&
+    cp -i ${DEV_DIR}/filetemplates/FileTemplate.hpp ${DEV_DIR}/$DIR/include/$DIR/
+  if [[ "$FILENAME" != "" ]] ; then
+    mv -i ${DEV_DIR}/$DIR/include/$DIR/FileTemplate.hpp ${DEV_DIR}/$DIR/include/$DIR/$FILENAME.hpp
+    sed -i "s/FileTemplate/$FILENAME/g" ${DEV_DIR}/$DIR/include/$DIR/$FILENAME.hpp
+  fi
+  echo "Made template file."
+fi
+
+if [[ UNITTEST -eq 1 ]] ; then
+  cp -r -i ${DEV_DIR}/filetemplates/unittests/ ${DEV_DIR}/$DIR/
+  echo "Made unittest dir"
+fi
