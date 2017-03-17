@@ -20,3 +20,7 @@ then
 else
   echo "Git global email already set...continuing."
 fi
+
+git config --global diff.tool meld
+git config --global merge.tool meld
+git config --global --add difftool.prompt false
