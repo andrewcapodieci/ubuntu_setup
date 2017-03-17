@@ -1,0 +1,150 @@
+#!/bin/bash
+
+################################################################/
+## author    Chris L Baker (clb) <chris@chimail.net>
+## date      2013.10.10
+## brief     do the "right" (for some obscure version of right) thing
+##           to process core files
+##
+## attention Copyright (C) 2013
+## attention Chris L Baker
+## attention All rights reserved
+################################################################/
+
+# The version
+function version()
+{
+    echo
+    echo "VERSION"
+    echo "        ggg is version 0.0.0.1"
+    echo
+    echo "AUTHOR"
+    echo "        Chris L Baker (clb) <chris@chimail.net>"
+    echo
+    echo "COPYRIGHT"
+    echo "        Copyright (C) 2013"
+    echo "        Chris L Baker"
+    echo "        All rights reserved"
+    echo
+}
+
+# The usage
+function usage()
+{
+    echo
+    echo "NAME"
+    echo "        ggg - The name is chosen similar to ddd"
+    echo
+    echo "SYNOPSIS"
+    echo "        ggg [OPTION]"
+    echo
+    echo "        Just type ggg at the command line. This script will attempt to find the"
+    echo "        latest core file generated in either the local directory or"
+    echo "        /tmp/core and runs gdb on it."
+    echo
+    echo "OPTIONS"
+    echo "        -c,--core"
+    echo "            The core file that should be used. This is optional and if not"
+    echo "            specified, the most recent file with \"core\" in the name will"
+    echo "            be used"
+    echo
+    echo "        -e,-exe"
+    echo "            The executable that generated the last core file"
+    echo
+    echo "        -v,--version"
+    echo "            Print version information and exit"
+    echo
+    echo "        -h,--help"
+    echo "            Print the help and useage (this information) and exit"
+    echo
+    echo "SETUP"
+    echo "        To set this up (under ubuntu at least) just put the following in your"
+    echo "        /proc/sys/kernel/core_pattern:"
+    echo "          | /usr/bin/core_helper %p %s %u %g %e"
+    echo "        To do this permanently, add a file to /etc/sysctl.d called 60-core-pattern.conf"
+    echo "        with the following:"
+    echo "          kernel.core_pattern=| /usr/bin/core_helper %p %s %u %g %e"
+    echo "        For me, this is just a sim link like so:"
+    echo "          > cd /etc/sysctl.d"
+    echo "          > sudo ln -s ~/src/env/60-core-pattern.conf"
+    echo "        Then, this core_helper file..."
+    echo "          > cd /usr/bin"
+    echo "          > sudo ln -s ~/bin/core_helper"
+    echo "        That's about it...?"
+    version
+}
+
+# use this to get the command line options
+command=`getopt -l core,exe,version,help -o c:e:vh -- "$@"`
+if [ $? != 0 ]; then
+    echo "Error processing input args"
+    exit -1;
+fi
+eval set -- "$command"
+
+# process the command line
+core=""
+exe=""
+while [ $# -gt 0 ]; do
+    case "$1" in
+        (-c|--core) shift; core=$1; shift;;
+        (-e|--exe) shift; exe=$1; shift;;
+        (-v|--version) version; exit 0;;
+        (-h|--help) usage; exit 0;;
+        (--) shift; break;;
+        (*|-*|--*)
+        echo
+        echo "Command Provided: $command" 1>&2
+        echo " --> ERROR - unrecognized option '$1'" 1>&2
+        echo " --> try -h for usage help" 1>&2
+        echo
+        exit -1
+        ;;
+    esac
+    shift
+done
+
+if [[ "" == $core ]]; then
+    # first find the last core files in the current directory
+    localCore=`find . -maxdepth 1 -iname "core.*" | tail -1`
+    echo $localCore
+
+    # now find the last core file in /tmp/core.*
+    core='/tmp/core' # `find /tmp/ -maxdepth 1 -iname "core" | tail -1`
+    echo $core
+
+    # now figure out which is newer
+    if [[ $localCore -nt $core ]]; then
+        core="$localCore"
+    fi
+fi
+
+if [[ ! -f $core ]]; then
+    echo "ERROR - File not found: $core"
+    exit -2
+fi
+
+# try to parse out the executable that generated this core file
+if [[ "" == $exe ]]; then
+    #exe=`file $core | sed -r s/".* from '"/''/ | sed -r s/' .*'/''/ | sed -r s/"'"/""/g`
+    #envoked=`file $core | sed -r s/".* from '(.*)'"/"\1"/`
+    exe=`head -n1 /tmp/core-data | cut -d' ' -f2`
+fi
+
+# inform the user of what we have found
+echo "The best guess at what core you want to look at is:"
+echo " --> $core"
+echo
+echo "The program that generated $core is $exe"
+echo
+#echo "The program was envoked with something like this:"
+#echo " --> $envoked"
+#echo
+echo "Starting gdb with cmd=$exe and core=$core"
+echo
+echo "---------------------------------------------------"
+echo
+
+# now run gdb - I suppose we could check if ddd is installed and run that
+# if it is installed, but for now, gdb will suffice
+gdb $exe $core

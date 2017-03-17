@@ -1,0 +1,39 @@
+#!/bin/bash
+# authored by Chris Baker
+
+echo "  This is intended to be envoked from core_pattern, not the command line,"
+echo "  so if you are seeing this, you're running it wrong."
+echo "  Instead, do this:"
+echo "  $> echo \"| /usr/bin/core_helper %p %s %u %g %e\" > /proc/sys/kernel/core_pattern"
+echo
+echo "  Or, to make it permanent:"
+echo "  $> echo \"kernel.core_pattern=\"| /usr/bin/core_helper %p %s %u %g %e\" > /etc/sysctl.d/60-core-pattern.conf"
+echo
+echo
+echo "  Now, ctrl-c your way out-a here and do it right"
+
+pid=$1
+sig=$2
+uid=$3
+gid=$4
+exe=$5
+
+# get the program name
+pro=`readlink /proc/$pid/exe`
+
+dd=`date +%Y.%m.%d.%H.%M.%S`
+core_file="/tmp/$dd.$exe.core"
+
+cat - > $core_file
+chown $uid.$gid $core_file
+ln -sf $core_file /tmp/core
+
+core_data="/tmp/$dd.$exe.core_data"
+echo "PRO: $pro" >> $core_data
+echo "EXE: $exe" >> $core_data
+echo "PID: $pid" >> $core_data
+echo "GID: $pid" >> $core_data
+echo "UID: $pid" >> $core_data
+echo "SIG: $pid" >> $core_data
+chown $uid.$gid $core_data
+ln -sf $core_data /tmp/core-data
