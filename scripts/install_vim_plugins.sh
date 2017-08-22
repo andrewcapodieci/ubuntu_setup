@@ -17,3 +17,5 @@ CHECK_DIR_AND_CLONE nerdtree https://github.com/scrooloose/nerdtree
 CHECK_DIR_AND_CLONE nerdcommenter https://github.com/scrooloose/nerdcommenter
 
 CHECK_DIR_AND_CLONE tagbar https://github.com/majutsushi/tagbar
+
+CHECK_DIR_AND_CLONE vim-colors-solarized https://github.com/altercation/vim-colors-solarized.git
