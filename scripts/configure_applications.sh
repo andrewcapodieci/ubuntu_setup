@@ -19,5 +19,5 @@ else
 fi
 
 echo "Configuring gnome-terminal font"
-gconftool-2 --set /apps/gnome-terminal/profiles/Default/font --type string "Liberation Mono 9"
+gconftool-2 --set /apps/gnome-terminal/profiles/Default/font --type string "Liberation Mono 7"
 gconftool-2 --set /apps/gnome-terminal/profiles/Default/use_system_font --type=boolean false
