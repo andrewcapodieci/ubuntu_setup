@@ -11,3 +11,8 @@ alias git-diff-ignore-whitespace='git diff --ignore-space-at-eol -b -w --ignore-
 ulimit -c unlimited
 
 PATH=$PATH:~/ubuntu_setup/bin
+
+#Eternal bash history
+export HISTFILESIZE=
+export HISTSIZE=
+export HISTTIMEFORMAT="[%F %T] "
