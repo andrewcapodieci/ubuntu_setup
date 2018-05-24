@@ -8,6 +8,7 @@ filetype plugin on
 " Call the function whenever opening a .cpp file
 autocmd FileType cpp call SetCPPOptions()
 autocmd FileType tpp call SetTPPOptions()
+autocmd FileType python call SetPythonOptions()
 autocmd VimEnter * NERDTree
 autocmd VimEnter * wincmd p
 autocmd WinEnter * call NERDTreeQuit()
@@ -147,6 +148,7 @@ nmap <F8> :TagbarToggle<CR>
 " => Helper Functions
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 function! SetCPPOptions()
+    :set syntax=cpp
     :call tagbar#autoopen(0)
 endfunction
 
@@ -154,6 +156,12 @@ function! SetTPPOptions()
     :set syntax=cpp
     :call tagbar#autoopen(0)
 endfunction
+
+function! SetPythonOptions()
+    :set syntax=python
+    :call tagbar#autoopen(0)
+endfunction
+
 
 function! NERDTreeQuit()
   redir => buffersoutput
