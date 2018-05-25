@@ -28,4 +28,4 @@ make
 sudo make install
 popd
 
-CHECK_DIR_AND_CLONE https://github.com/w0rp/ale.git
+CHECK_DIR_AND_CLONE ale https://github.com/w0rp/ale.git
