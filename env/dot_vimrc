@@ -9,6 +9,7 @@ filetype plugin on
 autocmd FileType cpp call SetCPPOptions()
 autocmd FileType tpp call SetTPPOptions()
 autocmd FileType python call SetPythonOptions()
+autocmd FileType javascript call SetJSOptions()
 autocmd VimEnter * NERDTree
 autocmd VimEnter * wincmd p
 autocmd WinEnter * call NERDTreeQuit()
@@ -162,6 +163,10 @@ function! SetPythonOptions()
     :call tagbar#autoopen(0)
 endfunction
 
+function! SetJSOptions()
+    :set syntax=javascript
+    :call tagbar#autoopen(0)
+endfunction
 
 function! NERDTreeQuit()
   redir => buffersoutput
