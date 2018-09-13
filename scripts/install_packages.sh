@@ -1,3 +1,5 @@
+sudo add-apt-repository ppa:peek-developers/stable
+
 sudo apt-get update
 sudo apt-get install -y /
     vim /
@@ -15,4 +17,7 @@ sudo apt-get install -y /
     ttf-liberation /
     tree /
     htop /
-    autoconf
+    autoconf /
+    pdftk /
+    kdenlive /
+    peek
