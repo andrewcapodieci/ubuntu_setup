@@ -2,11 +2,10 @@
 "\e[A":history-search-backward
 "\e[B":history-search-forward
 
-#Switch bell to visible instead of audible
-set bell-type visible
+###Alter the default behavior of the completion functions###
 
-#Alter the default behavior of the completion functions...set to on causes the matches to be listed immediately instead of ringing the bell
+#Set to on causes the matches to be listed immediately instead of ringing the bell
 set show-all-if-ambiguous on
 
-#Ingore cause in auto-complete
+#Ignore case in auto-completion
 set completion-ignore-case on

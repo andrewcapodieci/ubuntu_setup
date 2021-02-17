@@ -1,23 +1,17 @@
 sudo add-apt-repository ppa:peek-developers/stable
 
 sudo apt-get update
-sudo apt-get install -y /
-    vim /
-    vim-gnome /
-    screen /
-    git /
-    gitk /
-    indicator-multiload /
-    indicator-cpufreq /
-    exuberant-ctags /
-    yakuake /
-    clang /
-    libclang-dev /
-    curl /
-    ttf-liberation /
-    tree /
-    htop /
-    autoconf /
-    pdftk /
-    kdenlive /
-    peek
+sudo apt-get install -y \
+    autoconf \
+    clang \
+    curl \
+    exuberant-ctags \
+    fonts-liberation2 \
+    git \
+    gitk \
+    htop \
+    libclang-dev \
+    peek \
+    screen \
+    tree \
+    vim
