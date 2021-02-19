@@ -14,4 +14,5 @@ sudo apt-get install -y \
     peek \
     screen \
     tree \
-    vim
+    vim \
+    vim-gtk
