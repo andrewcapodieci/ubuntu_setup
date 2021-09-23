@@ -14,6 +14,7 @@ autocmd VimEnter * NERDTree
 autocmd VimEnter * wincmd p
 autocmd WinEnter * call NERDTreeQuit()
 
+au BufRead,BufNewFile *.launch setfiletype xml
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => VIM user interface
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
