@@ -5,7 +5,7 @@ filetype plugin on
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Autocmd's
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Call the function whenever opening a .cpp file
+" Call the functions whenever opening specific file types
 autocmd FileType cpp call SetCPPOptions()
 autocmd FileType tpp call SetTPPOptions()
 autocmd FileType python call SetPythonOptions()
@@ -13,6 +13,9 @@ autocmd FileType javascript call SetJSOptions()
 autocmd VimEnter * NERDTree
 autocmd VimEnter * wincmd p
 autocmd WinEnter * call NERDTreeQuit()
+
+au BufNewFile,BufRead *.launch setfiletype xml
+au BufNewFile,BufRead *.node setfiletype xml
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => VIM user interface
