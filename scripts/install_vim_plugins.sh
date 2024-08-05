@@ -12,13 +12,11 @@ mkdir -p ~/.vim/autoload ~/.vim/bundle && \
 curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
 pushd ~/.vim/bundle
 
-CHECK_DIR_AND_CLONE nerdtree https://github.com/scrooloose/nerdtree
+CHECK_DIR_AND_CLONE nerdtree https://github.com/preservim/nerdtree
 
-CHECK_DIR_AND_CLONE nerdcommenter https://github.com/scrooloose/nerdcommenter
+CHECK_DIR_AND_CLONE nerdcommenter https://github.com/preservim/nerdcommenter
 
-CHECK_DIR_AND_CLONE tagbar https://github.com/majutsushi/tagbar
-
-CHECK_DIR_AND_CLONE vim-colors-solarized https://github.com/altercation/vim-colors-solarized.git
+CHECK_DIR_AND_CLONE tagbar https://github.com/preservim/tagbar
 
 CHECK_DIR_AND_CLONE ctags https://github.com/universal-ctags/ctags
 pushd ctags
@@ -28,4 +26,4 @@ make
 sudo make install
 popd
 
-CHECK_DIR_AND_CLONE ale https://github.com/w0rp/ale.git
+CHECK_DIR_AND_CLONE ale https://github.com/dense-analysis/ale.git
