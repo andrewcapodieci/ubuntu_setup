@@ -11,8 +11,8 @@ sudo apt-get install -y \
     gitk \
     htop \
     libclang-dev \
+    meld \
     peek \
-    screen \
+    tmux \
     tree \
-    vim \
-    vim-gtk
+    vim
