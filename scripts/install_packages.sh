@@ -6,6 +6,7 @@ sudo apt-get install -y \
     clang \
     curl \
     exuberant-ctags \
+    filezilla \
     fonts-liberation2 \
     git \
     gitk \
@@ -15,4 +16,5 @@ sudo apt-get install -y \
     peek \
     tmux \
     tree \
-    vim
+    vim \
+    vlc
